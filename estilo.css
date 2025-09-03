@@ -1,0 +1,127 @@
+
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: sans-serif, Arial;
+    line-height: 1.6;
+    color: #fff;
+    background: #1e1e1e;
+}
+
+header {
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url(../img/img1.webp);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+
+
+nav {
+    margin-top: 1rem;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    padding: 2rem;
+    max-width: 100%;
+    margin: auto;
+}
+
+#contacto {
+    background-color: #212121;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #123565;
+}
+
+.proyectos, .habilidades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    background: rgb(37, 37, 62);
+    width: 50%;
+    padding: 1rem;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #131313;
+    transition: transform 0.2s;
+}
+
+.card p {
+    color: #aaa;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+#foto_valen {
+    width: 200px;
+    border-radius: 8px;
+    transition: filter 0.3s ease;
+}
+
+img:hover {
+  filter:brightness(80%) contrast(120%);/*baja el brillo y aumenta el contraste*/ 
+}
+
+.presentacion_container {
+    display: flex;
+    gap: 15px;
+}
+
+/* Botónes */
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    width: 120px;
+    margin-top: 1rem;
+    padding: 10px 15px;
+    background: #2a4ab9;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.btn:hover {
+    background: #2978ef;
+}
+
+footer {
+    background: #001430;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.5rem; }
+  nav { display: flex; flex-direction: column; gap: 10px; }
+}
