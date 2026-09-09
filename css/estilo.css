@@ -1,127 +1,444 @@
+/* =========================================================
+   PORTFOLIO — VALENTIN PAUL
+   Concepto: terminal / consola de desarrollo.
+   Tipografía: JetBrains Mono (display/UI) + Inter (lectura)
+   Paleta: negro cálido + ámbar fósforo (monitor CRT)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-bg:        #0c0f0c;
+  --color-surface:   #14170f;
+  --color-border:    #2b3226;
+  --color-text:      #e7e3d3;
+  --color-text-dim:  #8a9186;
+  --color-amber:     #ffb000;
+  --color-amber-dim: #c98a00;
+
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius: 6px;
+  --maxw: 980px;
+}
 
 /* Reset básico */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
-    font-family: sans-serif, Arial;
-    line-height: 1.6;
-    color: #fff;
-    background: #1e1e1e;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--color-bg);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-header {
-    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url(../img/img1.webp);
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
+::selection { background: var(--color-amber); color: #0c0f0c; }
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
 }
 
-
-
-nav {
-    margin-top: 1rem;
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-amber-dim);
+  margin-bottom: 0.6rem;
 }
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
+
+.eyebrow::before { content: "// "; color: var(--color-text-dim); }
+
+h2 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
 }
-nav a:hover {
-    text-decoration: underline;
+
+.section-intro {
+  color: var(--color-text-dim);
+  margin-bottom: 2rem;
+  max-width: 60ch;
 }
 
 section {
-    padding: 2rem;
-    max-width: 100%;
-    margin: auto;
+  padding: 4.5rem 1.5rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
-#contacto {
-    background-color: #212121;
+/* =========================================================
+   HEADER — ventana de terminal
+   ========================================================= */
+
+header {
+  padding: 3.5rem 1.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
-h2 {
-    margin-bottom: 1rem;
-    color: #123565;
+header::before {
+  /* viñeta sutil tipo CRT, solo en el hero */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+  z-index: 2;
 }
 
-.proyectos, .habilidades {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+.terminal {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 30px 60px -20px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.6rem 0.9rem;
+  background: #10130d;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3a3f34;
+}
+
+.terminal-title {
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+}
+
+.terminal-body {
+  padding: 1.6rem 1.5rem 1.9rem;
+  font-family: var(--font-mono);
+  text-align: left;
+}
+
+.terminal-line {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.terminal-line .prompt { color: var(--color-amber-dim); }
+.terminal-line .cmd { color: var(--color-text); }
+
+.terminal-output h1 {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 800;
+  color: var(--color-amber);
+  letter-spacing: -0.02em;
+  margin: 0.9rem 0 0.3rem;
+}
+
+.terminal-output .role {
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+  margin-bottom: 1.1rem;
+}
+
+.terminal-output .role .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--color-amber);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.header-buttons {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+.btn-outline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  border: 1px solid var(--color-amber-dim);
+  color: var(--color-amber);
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-amber);
+  color: #0c0f0c;
+}
+
+nav {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--color-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+}
+
+nav a {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+nav a::before { content: "cd "; color: var(--color-amber-dim); }
+
+nav a:hover { color: var(--color-amber); text-decoration: none; }
+
+/* =========================================================
+   PROYECTOS — listado tipo "ls -la"
+   ========================================================= */
+
+.proyectos {
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
-    background: rgb(37, 37, 62);
-    width: 50%;
-    padding: 1rem;
-    margin-top: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px #131313;
-    transition: transform 0.2s;
-}
-
-.card p {
-    color: #aaa;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-amber-dim);
+  padding: 1.4rem 1.5rem;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+  border-left-color: var(--color-amber);
+  transform: translateX(4px);
 }
 
-#foto_valen {
-    width: 200px;
-    border-radius: 8px;
-    transition: filter 0.3s ease;
+.card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
 }
 
-img:hover {
-  filter:brightness(80%) contrast(120%);/*baja el brillo y aumenta el contraste*/ 
+.card-head .path {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
 }
 
-.presentacion_container {
-    display: flex;
-    gap: 15px;
+.card h3 {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: var(--color-text);
+  font-weight: 600;
 }
 
-/* Botónes */
+.card p { color: var(--color-text-dim); }
+
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.8rem 0 1rem;
+}
+
+.stack-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-amber-dim);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+}
 
 .btn-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .btn {
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    width: 120px;
-    margin-top: 1rem;
-    padding: 10px 15px;
-    background: #2a4ab9;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.55rem 0.9rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
+
+.btn::before { content: "$"; color: var(--color-amber-dim); }
+
 .btn:hover {
-    background: #2978ef;
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  background: transparent;
 }
+
+/* =========================================================
+   HABILIDADES — árbol de directorios
+   ========================================================= */
+
+.habilidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.habilidades .card {
+  border-left: 3px solid var(--color-border);
+  margin-top: 0;
+}
+
+.habilidades .card:hover { border-left-color: var(--color-amber); }
+
+.habilidades h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.habilidades h3::before {
+  content: "▸";
+  color: var(--color-amber-dim);
+}
+
+/* =========================================================
+   SOBRE MI
+   ========================================================= */
+
+#sobre_mi { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+
+.presentacion_container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.foto-frame {
+  flex-shrink: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  background: var(--color-bg);
+}
+
+.foto-frame .frame-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  margin-bottom: 0.4rem;
+  padding: 0 0.2rem;
+}
+
+#foto_valen {
+  width: 190px;
+  border-radius: 3px;
+  filter: grayscale(35%) contrast(105%);
+  transition: filter 0.3s ease;
+}
+
+#foto_valen:hover {
+  filter: grayscale(0%) contrast(115%) sepia(15%);
+}
+
+.about-text p { color: var(--color-text-dim); }
+.about-text strong { color: var(--color-text); }
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+
+#contacto .terminal { max-width: 620px; margin: 0; }
+#contacto .terminal-body { text-align: left; }
+
+.contact-line {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--color-text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.contact-line .prompt { color: var(--color-amber-dim); }
+.contact-line strong { color: var(--color-amber); font-weight: 600; }
+
+#contacto .btn-container { margin-top: 1.2rem; justify-content: flex-start; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
-    background: #001430;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
+  background: var(--color-surface);
+  color: var(--color-text-dim);
+  text-align: center;
+  padding: 1.6rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  header h1 { font-size: 1.5rem; }
-  nav { display: flex; flex-direction: column; gap: 10px; }
+/* =========================================================
+   Responsivo
+   ========================================================= */
+
+@media (max-width: 640px) {
+  section { padding: 3rem 1.2rem; }
+
+  nav { flex-direction: column; gap: 0.6rem; }
+
+  .presentacion_container {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .terminal-output h1 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
